@@ -30,7 +30,7 @@ def display_python(text="is cool"):
     return f"Python {text.replace('_', ' ')}"
 
 
-@app.route('/number/<n>', strict_slashes=False)
+@app.route('/number/<int:n>', strict_slashes=False)
 def display_number(n):
     """number path"""
     return f"{n} is a number"
