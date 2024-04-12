@@ -22,13 +22,12 @@ class State(BaseModel, Base):
         """initializes state"""
         super().__init__(*args, **kwargs)
 
-    if models.storage_t != "db":
+    if getenv("HBNB_TYPE_STORAGE") != 'db':
         @property
         def cities(self):
-            """get the list of city instances related to the state"""
+            """ get list of all related city obj"""
             city_list = []
-            all_cities = models.storage.all(City)
-            for city in all_cities.values():
+            for city in list(models.storage.all(City).values()):
                 if city.state_id == self.id:
                     city_list.append(city)
             return city_list
